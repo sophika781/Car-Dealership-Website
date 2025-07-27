@@ -73,7 +73,7 @@ def registration(request):
 
 def get_cars(request):
     count = CarMake.objects.filter().count()
-    print(count)
+    print("Count: ", count)
     if(count == 0):
         initiate()
     car_models = CarModel.objects.select_related('car_make')
@@ -93,16 +93,18 @@ def get_dealerships(request, state="All"):
 
 # Create a `get_dealer_reviews` view to render the reviews of a dealer
 def get_dealer_reviews(request, dealer_id):
+    # if dealer id has been provided
     if(dealer_id):
-        endpoint= "/fetchDealer/dealer/"+str(dealer_id)
-        reviews= get_request(endpoint)
-        for review in reviews:
-            response= analyze_review_sentiments(review_detail['review'])
-            print(response)
-            review_detail['sentiment']= response['sentiment']
-        return JsonResponse({'status': 200, "dealer":reviews})
-    else    
-        return JsonResponse({'status':400, "message":"Bad Request"})
+        endpoint = "/fetchReviews/dealer/"+str(dealer_id)
+        reviews = get_request(endpoint)
+        for review_detail in reviews:
+            print("Review: ", review_detail['review'])
+            response = analyze_review_sentiments(review_detail['review'])
+            print("Response: ", response)
+            review_detail['sentiment'] = response['sentiment']
+        return JsonResponse({"status":200,"reviews":reviews})
+    else:
+        return JsonResponse({"status":400,"message":"Bad Request"})
 
 # Create a `get_dealer_details` view to render the dealer details
 def get_dealer_details(request, dealer_id):

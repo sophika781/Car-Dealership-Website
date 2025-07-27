@@ -22,7 +22,7 @@ const Dealer = () => {
   let id =params.id;
   let dealer_url = root_url+`djangoapp/dealer/${id}`;
   let reviews_url = root_url+`djangoapp/reviews/dealer/${id}`;
-  let post_review = root_url+`postreview/${id}`;
+  let post_review = root_url + `postreview/${id}`;
   
   const get_dealer = async ()=>{
     const res = await fetch(dealer_url, {
@@ -31,7 +31,7 @@ const Dealer = () => {
     const retobj = await res.json();
     
     if(retobj.status === 200) {
-      setDealer(retobj.dealer)
+      setDealer(retobj.dealer[0])
     }
   }
 
@@ -48,6 +48,7 @@ const Dealer = () => {
         setUnreviewed(true);
       }
     }
+    console.log(retobj);
   }
 
   const senti_icon = (sentiment)=>{
@@ -67,13 +68,13 @@ const Dealer = () => {
 
 
 return(
-  <div style={{margin:"20px"}}>
+  <div>
       <Header/>
-      <div style={{marginTop:"10px"}}>
+      <div style={{margin:"20px"}}>
       <h1 style={{color:"grey"}}>{dealer.full_name}{postReview}</h1>
       <h4  style={{color:"grey"}}>{dealer['city']},{dealer['address']}, Zip - {dealer['zip']}, {dealer['state']} </h4>
       </div>
-      <div class="reviews_panel">
+      <div class="reviews_panel" style={{margin:"20px"}}>
       {reviews.length === 0 && unreviewed === false ? (
         <text>Loading Reviews....</text>
       ):  unreviewed === true? <div>No reviews yet! </div> :

@@ -80,6 +80,7 @@ const PostReview = () => {
       method: "GET"
     });
     const retobj = await res.json();
+    console.log(retobj)
     
     let carmodelsarr = Array.from(retobj.CarModels)
     setCarmodels(carmodelsarr)
