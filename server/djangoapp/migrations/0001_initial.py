@@ -32,11 +32,13 @@ class Migration(migrations.Migration):
                                                serialize=False,
                                                verbose_name='ID')),
                     ('name', models.CharField(max_length=100)),
-                    ('model_type', models.CharField(choices=[('SEDAN', 'Sedan'),
+                    ('model_type', models.CharField(
+                                                    choices=[('SEDAN', 'Sedan'),
                                                              ('SUV', 'SUV'), 
                                                              ('WAGON', 'Wagon')],
                                                     default='SUV',
-                                                    max_length=10)),
+                                                    max_length=10
+                                                    )),
                     ('year', models.IntegerField(default=2023,
                                                  validators=[
                                                     django.core.validators.MaxValueValidator(2023),
