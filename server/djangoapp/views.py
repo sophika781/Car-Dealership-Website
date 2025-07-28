@@ -36,13 +36,13 @@ def login_user(request):
 
 
 # Create a `logout_request` view to handle sign out request
-def logout_request(request): 
-    data={"userName": ""}
+def logout_request(request):
+    data= {"userName": ""}
     return JsonResponse(data)
 
 
 # Create a `registration` view to handle sign up request
-@csrf_exempt 
+@csrf_exempt
 def registration(request):
     data = json.loads(request.body)
     username = data["userName"]
@@ -52,14 +52,16 @@ def registration(request):
     email = data["email"]
     username_exist = False
     try:
-        User.objects.get(username = username)
+        User.objects.get(username=username)
         username_exist = True
     except Exception as e:
-        logger.debug("{} is new user. Error: {e}".format(username))
+        logger.debug(f"{} is new user. Error: {e}".format(username))
     if not username_exist:
-        user = User.objects.create_user(username = username, 
-            first_name = first_name, last_name = last_name, 
-            password = password, email = email)
+        user = User.objects.create_user(username=username, 
+                                        first_name=first_name, 
+                                        last_name=last_name, 
+                                        password=password, 
+                                        email=email)
         login(request, user)
         data = {"userName": username, "status": "Authenticated"}
         return JsonResponse(data)
