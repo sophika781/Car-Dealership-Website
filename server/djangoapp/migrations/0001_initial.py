@@ -42,15 +42,17 @@ class Migration(migrations.Migration):
                         max_length=10,
                     )),
 
-                    ('year', models.IntegerField(default=2023,
-                                                 validators=[
-                                                    django.core.validators.MaxValueValidator(
-                                                        2023
-                                                    ),
-                                                    django.core.validators.MinValueValidator(
-                                                        2015
-                                                    )
-                                                    ])),
+                    ('year', models.IntegerField(
+                        default=2023,
+                        validators=[
+                            django.core.validators.MaxValueValidator(
+                                2023
+                            ),
+                            django.core.validators.MinValueValidator(
+                                2015
+                            )
+                        ]
+                    )),
                     ('car_make', models.ForeignKey(
                                                     on_delete=django.db.models.deletion.CASCADE,
                                                     to='djangoapp.carmake')),
