@@ -37,9 +37,9 @@ class Migration(migrations.Migration):
                                                               'Sedan'),
                                                              ('SUV',
                                                               'SUV'),
-                                                             ('WAGON', 
-                                                              'Wagon'
-                                                            )],
+                                                             ('WAGON',
+                                                              'Wagon')
+                                                            ],
                                                     default='SUV',
                                                     max_length=10
                                                     )),
@@ -49,7 +49,7 @@ class Migration(migrations.Migration):
                                                     django.core.validators.MinValueValidator(2015)
                                                     ])),
                     ('car_make', models.ForeignKey(on_delete=
-                                                              django.db.models.deletion.CASCADE,
+                                                            django.db.models.deletion.CASCADE,
                                                    to='djangoapp.carmake')),
             ],
         ),
